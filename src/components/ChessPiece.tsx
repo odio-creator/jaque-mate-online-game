@@ -29,11 +29,6 @@ const ChessPiece = ({ piece, onClick, isSelected, isPossibleMove }: ChessPiecePr
     return pieceSymbols[`${piece.color}-${piece.type}`] || '';
   };
 
-  const getPieceColor = () => {
-    if (!piece) return '';
-    return piece.color === 'white' ? 'text-white' : 'text-gray-900';
-  };
-
   return (
     <div
       className={`
@@ -49,16 +44,14 @@ const ChessPiece = ({ piece, onClick, isSelected, isPossibleMove }: ChessPiecePr
       {piece && (
         <div 
           className={`
-            ${getPieceColor()}
+            text-gray-900
             drop-shadow-[2px_2px_4px_rgba(0,0,0,0.8)]
             filter contrast-125 brightness-110
             transition-all duration-200
             ${isSelected ? 'animate-pulse' : ''}
           `}
           style={{
-            textShadow: piece.color === 'white' 
-              ? '2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 2px 2px 4px rgba(0,0,0,0.5)'
-              : '2px 2px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 2px 2px 4px rgba(255,255,255,0.3)'
+            textShadow: '2px 2px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 2px 2px 4px rgba(255,255,255,0.3)'
           }}
         >
           {getPieceSymbol()}
