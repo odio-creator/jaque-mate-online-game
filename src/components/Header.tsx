@@ -7,12 +7,12 @@ const Header = () => {
   const location = useLocation();
   
   return (
-    <header className="bg-black/90 backdrop-blur-sm border-b border-amber-500/20 sticky top-0 z-50">
+    <header className="bg-slate-900/95 backdrop-blur-sm border-b border-purple-500/30 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2 group">
-            <Crown className="h-8 w-8 text-amber-500 group-hover:text-amber-400 transition-colors" />
-            <span className="text-2xl font-bold text-white group-hover:text-amber-100 transition-colors">
+            <Crown className="h-8 w-8 text-purple-500 group-hover:text-purple-400 transition-colors" />
+            <span className="text-2xl font-bold text-slate-100 group-hover:text-purple-100 transition-colors">
               ChessMaster
             </span>
           </Link>
@@ -21,7 +21,7 @@ const Header = () => {
             <Link to="/">
               <Button 
                 variant={location.pathname === "/" ? "default" : "ghost"}
-                className="text-white hover:text-amber-100 hover:bg-amber-500/20"
+                className="text-slate-100 hover:text-purple-100 hover:bg-purple-600/20"
               >
                 <Crown className="w-4 h-4 mr-2" />
                 Início
@@ -31,7 +31,7 @@ const Header = () => {
             <Link to="/rules">
               <Button 
                 variant={location.pathname === "/rules" ? "default" : "ghost"}
-                className="text-white hover:text-amber-100 hover:bg-amber-500/20"
+                className="text-slate-100 hover:text-purple-100 hover:bg-purple-600/20"
               >
                 <BookOpen className="w-4 h-4 mr-2" />
                 Regras
@@ -41,7 +41,7 @@ const Header = () => {
             <Link to="/game">
               <Button 
                 variant={location.pathname === "/game" ? "default" : "ghost"}
-                className="bg-amber-500 hover:bg-amber-600 text-black font-semibold"
+                className="bg-purple-600 hover:bg-purple-700 text-white font-semibold shadow-lg"
               >
                 <Play className="w-4 h-4 mr-2" />
                 Jogar

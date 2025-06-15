@@ -167,22 +167,23 @@ const ChessBoard = () => {
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      <div className="text-white text-xl font-semibold text-center">
+      <div className="text-slate-100 text-xl font-semibold text-center">
         {getGameStatusMessage()}
         {isInCheck(gameState.board, gameState.currentPlayer) && gameState.gameStatus === 'check' && (
           <div className="text-red-400 text-sm mt-1">Rei em perigo!</div>
         )}
       </div>
       
-      <div className="grid grid-cols-8 border-2 border-amber-500 bg-amber-100">
+      <div className="grid grid-cols-8 border-2 border-purple-500 bg-slate-800 rounded-lg overflow-hidden shadow-2xl">
         {gameState.board.map((row, rowIndex) =>
           row.map((piece, colIndex) => (
             <div
               key={`${rowIndex}-${colIndex}`}
               className={`
-                ${(rowIndex + colIndex) % 2 === 0 ? 'bg-amber-100' : 'bg-amber-800'}
-                ${isSquareSelected(rowIndex, colIndex) ? 'ring-2 ring-amber-500' : ''}
-                ${isPossibleMove(rowIndex, colIndex) ? 'ring-2 ring-green-500' : ''}
+                ${(rowIndex + colIndex) % 2 === 0 ? 'bg-slate-200' : 'bg-slate-700'}
+                ${isSquareSelected(rowIndex, colIndex) ? 'ring-2 ring-purple-400 ring-inset' : ''}
+                ${isPossibleMove(rowIndex, colIndex) ? 'ring-2 ring-emerald-400 ring-inset' : ''}
+                transition-all duration-200
               `}
             >
               <ChessPiece
@@ -198,7 +199,7 @@ const ChessBoard = () => {
       
       <div className="flex space-x-4">
         <Button
-          className="bg-amber-500 hover:bg-amber-600 text-black font-semibold px-4 py-2 rounded"
+          className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl"
           onClick={resetGame}
         >
           Novo Jogo
@@ -206,11 +207,11 @@ const ChessBoard = () => {
       </div>
       
       {gameState.moveHistory.length > 0 && (
-        <div className="text-white text-sm">
-          <div className="mb-2 font-semibold">Histórico de Movimentos:</div>
-          <div className="max-h-32 overflow-y-auto bg-black/20 p-2 rounded">
+        <div className="text-slate-100 text-sm">
+          <div className="mb-2 font-semibold text-purple-300">Histórico de Movimentos:</div>
+          <div className="max-h-32 overflow-y-auto bg-slate-800/60 backdrop-blur-sm p-3 rounded-lg border border-purple-500/30">
             {gameState.moveHistory.slice(-10).map((move, index) => (
-              <div key={index} className="text-xs">
+              <div key={index} className="text-xs text-slate-300 py-1">
                 {move.piece.color === 'white' ? '♔' : '♛'} 
                 {String.fromCharCode(65 + move.from.col)}{8 - move.from.row} → 
                 {String.fromCharCode(65 + move.to.col)}{8 - move.to.row}
