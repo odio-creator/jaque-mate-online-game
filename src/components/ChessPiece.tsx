@@ -29,17 +29,45 @@ const ChessPiece = ({ piece, onClick, isSelected, isPossibleMove }: ChessPiecePr
     return pieceSymbols[`${piece.color}-${piece.type}`] || '';
   };
 
+  const getPieceColor = () => {
+    if (!piece) return '';
+    return piece.color === 'white' ? 'text-white' : 'text-gray-900';
+  };
+
   return (
     <div
       className={`
-        w-16 h-16 flex items-center justify-center text-4xl cursor-pointer
-        transition-all duration-200 hover:scale-110
-        ${isSelected ? 'bg-amber-400/50 ring-2 ring-amber-500' : ''}
-        ${isPossibleMove ? 'bg-green-400/30 ring-2 ring-green-500' : ''}
+        w-16 h-16 flex items-center justify-center text-5xl cursor-pointer
+        relative transition-all duration-300 ease-in-out
+        ${piece ? 'hover:scale-125 hover:z-10' : ''}
+        ${isSelected ? 'bg-amber-400/60 ring-4 ring-amber-500 shadow-lg shadow-amber-500/30' : ''}
+        ${isPossibleMove ? 'bg-green-400/40 ring-3 ring-green-500 shadow-md shadow-green-500/30' : ''}
+        ${piece ? 'hover:shadow-xl hover:shadow-black/30' : ''}
       `}
       onClick={onClick}
     >
-      {getPieceSymbol()}
+      {piece && (
+        <div 
+          className={`
+            ${getPieceColor()}
+            drop-shadow-[2px_2px_4px_rgba(0,0,0,0.8)]
+            filter contrast-125 brightness-110
+            transition-all duration-200
+            ${isSelected ? 'animate-pulse' : ''}
+          `}
+          style={{
+            textShadow: piece.color === 'white' 
+              ? '2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 2px 2px 4px rgba(0,0,0,0.5)'
+              : '2px 2px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 2px 2px 4px rgba(255,255,255,0.3)'
+          }}
+        >
+          {getPieceSymbol()}
+        </div>
+      )}
+      
+      {isPossibleMove && !piece && (
+        <div className="w-6 h-6 bg-green-500 rounded-full opacity-60 animate-pulse" />
+      )}
     </div>
   );
 };
