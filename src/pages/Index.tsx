@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,13 +23,15 @@ const Index = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
-              className="bg-amber-500 hover:bg-amber-600 text-black font-bold text-lg px-8 py-4 rounded-lg transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-amber-500/25"
-            >
-              <Play className="w-5 h-5 mr-2" />
-              Começar a Jogar
-            </Button>
+            <Link to="/game">
+              <Button 
+                size="lg" 
+                className="bg-amber-500 hover:bg-amber-600 text-black font-bold text-lg px-8 py-4 rounded-lg transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-amber-500/25"
+              >
+                <Play className="w-5 h-5 mr-2" />
+                Começar a Jogar
+              </Button>
+            </Link>
             
             <Link to="/rules">
               <Button 
@@ -96,13 +97,15 @@ const Index = () => {
           <p className="text-gray-300 mb-8 max-w-xl mx-auto">
             Junte-se a milhares de jogadores e descubra por que o xadrez é conhecido como o jogo dos reis.
           </p>
-          <Button 
-            size="lg"
-            className="bg-amber-500 hover:bg-amber-600 text-black font-bold text-lg px-12 py-4 rounded-lg transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-amber-500/25"
-          >
-            <Crown className="w-5 h-5 mr-2" />
-            Iniciar Jornada
-          </Button>
+          <Link to="/game">
+            <Button 
+              size="lg"
+              className="bg-amber-500 hover:bg-amber-600 text-black font-bold text-lg px-12 py-4 rounded-lg transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-amber-500/25"
+            >
+              <Crown className="w-5 h-5 mr-2" />
+              Iniciar Jornada
+            </Button>
+          </Link>
         </div>
       </section>
 

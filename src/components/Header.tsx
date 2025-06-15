@@ -38,10 +38,15 @@ const Header = () => {
               </Button>
             </Link>
             
-            <Button className="bg-amber-500 hover:bg-amber-600 text-black font-semibold">
-              <Play className="w-4 h-4 mr-2" />
-              Jogar
-            </Button>
+            <Link to="/game">
+              <Button 
+                variant={location.pathname === "/game" ? "default" : "ghost"}
+                className="bg-amber-500 hover:bg-amber-600 text-black font-semibold"
+              >
+                <Play className="w-4 h-4 mr-2" />
+                Jogar
+              </Button>
+            </Link>
           </div>
         </nav>
       </div>
