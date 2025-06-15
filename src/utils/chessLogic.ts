@@ -1,4 +1,3 @@
-
 import { Board, ChessPiece, Position, PieceType, PieceColor } from '@/types/chess';
 
 export const createInitialBoard = (): Board => {
@@ -87,9 +86,77 @@ export const getPossibleMoves = (board: Board, from: Position): Position[] => {
       });
       break;
       
-    // Adicione mais lógica para outras peças conforme necessário
-    default:
-      // Implementação básica para outras peças
+    case 'bishop':
+      // Movimentos diagonais
+      const bishopDirections = [[1, 1], [1, -1], [-1, 1], [-1, -1]];
+      bishopDirections.forEach(([rowDir, colDir]) => {
+        for (let i = 1; i < 8; i++) {
+          const newPos = { row: from.row + i * rowDir, col: from.col + i * colDir };
+          if (!isValidPosition(newPos)) break;
+          
+          const targetPiece = board[newPos.row][newPos.col];
+          if (!targetPiece) {
+            moves.push(newPos);
+          } else {
+            if (targetPiece.color !== piece.color) {
+              moves.push(newPos);
+            }
+            break;
+          }
+        }
+      });
+      break;
+      
+    case 'queen':
+      // Combina movimentos de torre e bispo
+      const queenDirections = [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]];
+      queenDirections.forEach(([rowDir, colDir]) => {
+        for (let i = 1; i < 8; i++) {
+          const newPos = { row: from.row + i * rowDir, col: from.col + i * colDir };
+          if (!isValidPosition(newPos)) break;
+          
+          const targetPiece = board[newPos.row][newPos.col];
+          if (!targetPiece) {
+            moves.push(newPos);
+          } else {
+            if (targetPiece.color !== piece.color) {
+              moves.push(newPos);
+            }
+            break;
+          }
+        }
+      });
+      break;
+      
+    case 'king':
+      // Uma casa em qualquer direção
+      const kingDirections = [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]];
+      kingDirections.forEach(([rowDir, colDir]) => {
+        const newPos = { row: from.row + rowDir, col: from.col + colDir };
+        if (isValidPosition(newPos)) {
+          const targetPiece = board[newPos.row][newPos.col];
+          if (!targetPiece || targetPiece.color !== piece.color) {
+            moves.push(newPos);
+          }
+        }
+      });
+      break;
+      
+    case 'knight':
+      // Movimentos em L
+      const knightMoves = [
+        [-2, -1], [-2, 1], [-1, -2], [-1, 2],
+        [1, -2], [1, 2], [2, -1], [2, 1]
+      ];
+      knightMoves.forEach(([rowOffset, colOffset]) => {
+        const newPos = { row: from.row + rowOffset, col: from.col + colOffset };
+        if (isValidPosition(newPos)) {
+          const targetPiece = board[newPos.row][newPos.col];
+          if (!targetPiece || targetPiece.color !== piece.color) {
+            moves.push(newPos);
+          }
+        }
+      });
       break;
   }
   
